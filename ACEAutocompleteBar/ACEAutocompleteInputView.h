@@ -29,4 +29,6 @@
 
 - (id)initWithBlock:(AutocompleteBlock)autocompleteBlock;
 
+- (void)show:(BOOL)show withAnimation:(BOOL)animated;
+
 @end

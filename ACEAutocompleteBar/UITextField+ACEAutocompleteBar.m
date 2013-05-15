@@ -23,11 +23,18 @@
     
     autocompleteBarView.delegate = self;
     self.delegate = autocompleteBarView;
+    
+    // init state is not visible
+    [autocompleteBarView show:NO withAnimation:NO];
 }
 
 - (void)inputView:(ACEAutocompleteInputView *)inputView didSelectString:(NSString *)string
 {
+    // update the text
     self.text = string;
+    
+    // hide the bar
+    [inputView show:NO withAnimation:YES];    
 }
 
 @end

@@ -62,6 +62,22 @@
     return self;
 }
 
+- (void)show:(BOOL)show withAnimation:(BOOL)animated
+{
+    if (animated) {
+        [UIView animateWithDuration:0.3
+                         animations:^{
+                             [self show:show withAnimation:NO];
+                         } completion:nil];
+        
+    } else {
+        self.alpha = (show) ? 1.0f : 0.0f;
+    }
+}
+
+
+#pragma makr - Helpers
+
 - (void)setDataSource:(NSArray *)dataSource
 {
     _dataSource = dataSource;
@@ -95,7 +111,6 @@
 {
     NSString * newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
     self.dataSource = self.autocompleteBlock(newText);
-    
     return YES;
 }
 
@@ -120,7 +135,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.dataSource.count;
+    NSInteger suggestions = self.dataSource.count;
+    [self show:suggestions > 0 withAnimation:YES];
+    return suggestions;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
