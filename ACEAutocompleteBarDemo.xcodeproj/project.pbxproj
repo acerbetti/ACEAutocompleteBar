@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B7CD43F174315F20086C346 /* ACEAutocompleteInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B7CD43C174315F20086C346 /* ACEAutocompleteInputView.m */; };
+		7B7CD440174315F20086C346 /* ACEAutocompleteTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B7CD43E174315F20086C346 /* ACEAutocompleteTextField.m */; };
 		7BAA5F271742E296004F055F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BAA5F261742E296004F055F /* UIKit.framework */; };
 		7BAA5F291742E296004F055F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BAA5F281742E296004F055F /* Foundation.framework */; };
 		7BAA5F2B1742E296004F055F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BAA5F2A1742E296004F055F /* CoreGraphics.framework */; };
@@ -18,11 +20,14 @@
 		7BAA5F3D1742E296004F055F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BAA5F3C1742E296004F055F /* Default-568h@2x.png */; };
 		7BAA5F401742E296004F055F /* ACEViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BAA5F3F1742E296004F055F /* ACEViewController.m */; };
 		7BAA5F431742E296004F055F /* ACEViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BAA5F411742E296004F055F /* ACEViewController.xib */; };
-		7BAA5F4C1742E378004F055F /* ACEAutocompleteTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BAA5F4B1742E378004F055F /* ACEAutocompleteTextField.m */; };
-		7BAA5F4F1742F37E004F055F /* ACEAutocompleteInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BAA5F4E1742F37E004F055F /* ACEAutocompleteInputView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7B7CD43A174315F20086C346 /* ACEAutocompleteBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEAutocompleteBar.h; sourceTree = "<group>"; };
+		7B7CD43B174315F20086C346 /* ACEAutocompleteInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEAutocompleteInputView.h; sourceTree = "<group>"; };
+		7B7CD43C174315F20086C346 /* ACEAutocompleteInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEAutocompleteInputView.m; sourceTree = "<group>"; };
+		7B7CD43D174315F20086C346 /* ACEAutocompleteTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEAutocompleteTextField.h; sourceTree = "<group>"; };
+		7B7CD43E174315F20086C346 /* ACEAutocompleteTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEAutocompleteTextField.m; sourceTree = "<group>"; };
 		7BAA5F231742E296004F055F /* ACEAutocompleteBarDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ACEAutocompleteBarDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BAA5F261742E296004F055F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7BAA5F281742E296004F055F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -39,11 +44,6 @@
 		7BAA5F3E1742E296004F055F /* ACEViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACEViewController.h; sourceTree = "<group>"; };
 		7BAA5F3F1742E296004F055F /* ACEViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACEViewController.m; sourceTree = "<group>"; };
 		7BAA5F421742E296004F055F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ACEViewController.xib; sourceTree = "<group>"; };
-		7BAA5F4A1742E378004F055F /* ACEAutocompleteTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEAutocompleteTextField.h; sourceTree = "<group>"; };
-		7BAA5F4B1742E378004F055F /* ACEAutocompleteTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEAutocompleteTextField.m; sourceTree = "<group>"; };
-		7BAA5F4D1742F37E004F055F /* ACEAutocompleteInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEAutocompleteInputView.h; sourceTree = "<group>"; };
-		7BAA5F4E1742F37E004F055F /* ACEAutocompleteInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEAutocompleteInputView.m; sourceTree = "<group>"; };
-		7BAA5F501742F45E004F055F /* ACEAutocompleteBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACEAutocompleteBar.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,9 +60,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B7CD439174315F20086C346 /* ACEAutocompleteBar */ = {
+			isa = PBXGroup;
+			children = (
+				7B7CD43A174315F20086C346 /* ACEAutocompleteBar.h */,
+				7B7CD43B174315F20086C346 /* ACEAutocompleteInputView.h */,
+				7B7CD43C174315F20086C346 /* ACEAutocompleteInputView.m */,
+				7B7CD43D174315F20086C346 /* ACEAutocompleteTextField.h */,
+				7B7CD43E174315F20086C346 /* ACEAutocompleteTextField.m */,
+			);
+			path = ACEAutocompleteBar;
+			sourceTree = "<group>";
+		};
 		7BAA5F1A1742E295004F055F = {
 			isa = PBXGroup;
 			children = (
+				7B7CD439174315F20086C346 /* ACEAutocompleteBar */,
 				7BAA5F2C1742E296004F055F /* ACEAutocompleteBarDemo */,
 				7BAA5F251742E296004F055F /* Frameworks */,
 				7BAA5F241742E296004F055F /* Products */,
@@ -90,7 +103,6 @@
 		7BAA5F2C1742E296004F055F /* ACEAutocompleteBarDemo */ = {
 			isa = PBXGroup;
 			children = (
-				7BAA5F491742E2C1004F055F /* ACEAutocompleteBar */,
 				7BAA5F351742E296004F055F /* ACEAppDelegate.h */,
 				7BAA5F361742E296004F055F /* ACEAppDelegate.m */,
 				7BAA5F3E1742E296004F055F /* ACEViewController.h */,
@@ -113,18 +125,6 @@
 				7BAA5F3C1742E296004F055F /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		7BAA5F491742E2C1004F055F /* ACEAutocompleteBar */ = {
-			isa = PBXGroup;
-			children = (
-				7BAA5F501742F45E004F055F /* ACEAutocompleteBar.h */,
-				7BAA5F4D1742F37E004F055F /* ACEAutocompleteInputView.h */,
-				7BAA5F4E1742F37E004F055F /* ACEAutocompleteInputView.m */,
-				7BAA5F4A1742E378004F055F /* ACEAutocompleteTextField.h */,
-				7BAA5F4B1742E378004F055F /* ACEAutocompleteTextField.m */,
-			);
-			path = ACEAutocompleteBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,8 +197,8 @@
 				7BAA5F331742E296004F055F /* main.m in Sources */,
 				7BAA5F371742E296004F055F /* ACEAppDelegate.m in Sources */,
 				7BAA5F401742E296004F055F /* ACEViewController.m in Sources */,
-				7BAA5F4C1742E378004F055F /* ACEAutocompleteTextField.m in Sources */,
-				7BAA5F4F1742F37E004F055F /* ACEAutocompleteInputView.m in Sources */,
+				7B7CD43F174315F20086C346 /* ACEAutocompleteInputView.m in Sources */,
+				7B7CD440174315F20086C346 /* ACEAutocompleteTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +321,7 @@
 				7BAA5F481742E296004F055F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
