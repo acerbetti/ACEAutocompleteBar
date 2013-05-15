@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7B7CD43F174315F20086C346 /* ACEAutocompleteInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B7CD43C174315F20086C346 /* ACEAutocompleteInputView.m */; };
-		7B7CD440174315F20086C346 /* ACEAutocompleteTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B7CD43E174315F20086C346 /* ACEAutocompleteTextField.m */; };
+		7B7CD4431744368D0086C346 /* UITextField+ACEAutocompleteBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B7CD4421744368D0086C346 /* UITextField+ACEAutocompleteBar.m */; };
 		7BAA5F271742E296004F055F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BAA5F261742E296004F055F /* UIKit.framework */; };
 		7BAA5F291742E296004F055F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BAA5F281742E296004F055F /* Foundation.framework */; };
 		7BAA5F2B1742E296004F055F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BAA5F2A1742E296004F055F /* CoreGraphics.framework */; };
@@ -26,8 +26,8 @@
 		7B7CD43A174315F20086C346 /* ACEAutocompleteBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEAutocompleteBar.h; sourceTree = "<group>"; };
 		7B7CD43B174315F20086C346 /* ACEAutocompleteInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEAutocompleteInputView.h; sourceTree = "<group>"; };
 		7B7CD43C174315F20086C346 /* ACEAutocompleteInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEAutocompleteInputView.m; sourceTree = "<group>"; };
-		7B7CD43D174315F20086C346 /* ACEAutocompleteTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEAutocompleteTextField.h; sourceTree = "<group>"; };
-		7B7CD43E174315F20086C346 /* ACEAutocompleteTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEAutocompleteTextField.m; sourceTree = "<group>"; };
+		7B7CD4411744368D0086C346 /* UITextField+ACEAutocompleteBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+ACEAutocompleteBar.h"; sourceTree = "<group>"; };
+		7B7CD4421744368D0086C346 /* UITextField+ACEAutocompleteBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+ACEAutocompleteBar.m"; sourceTree = "<group>"; };
 		7BAA5F231742E296004F055F /* ACEAutocompleteBarDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ACEAutocompleteBarDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BAA5F261742E296004F055F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7BAA5F281742E296004F055F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -66,8 +66,8 @@
 				7B7CD43A174315F20086C346 /* ACEAutocompleteBar.h */,
 				7B7CD43B174315F20086C346 /* ACEAutocompleteInputView.h */,
 				7B7CD43C174315F20086C346 /* ACEAutocompleteInputView.m */,
-				7B7CD43D174315F20086C346 /* ACEAutocompleteTextField.h */,
-				7B7CD43E174315F20086C346 /* ACEAutocompleteTextField.m */,
+				7B7CD4411744368D0086C346 /* UITextField+ACEAutocompleteBar.h */,
+				7B7CD4421744368D0086C346 /* UITextField+ACEAutocompleteBar.m */,
 			);
 			path = ACEAutocompleteBar;
 			sourceTree = "<group>";
@@ -198,7 +198,7 @@
 				7BAA5F371742E296004F055F /* ACEAppDelegate.m in Sources */,
 				7BAA5F401742E296004F055F /* ACEViewController.m in Sources */,
 				7B7CD43F174315F20086C346 /* ACEAutocompleteInputView.m in Sources */,
-				7B7CD440174315F20086C346 /* ACEAutocompleteTextField.m in Sources */,
+				7B7CD4431744368D0086C346 /* UITextField+ACEAutocompleteBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,10 +21,12 @@
 // THE SOFTWARE.
 
 
-#import "ACEAutocompleteBar.h"
+#import <UIKit/UIKit.h>
 
-@interface ACEAutocompleteInputView : UIView
+@interface ACEAutocompleteInputView : UIView<UITextFieldDelegate>
 
-@property (nonatomic, copy) NSArray * dataSource;
+@property (nonatomic, assign) id<ACEAutocompleteInputDelegate> delegate;
+
+- (id)initWithBlock:(AutocompleteBlock)autocompleteBlock;
 
 @end

@@ -8,10 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@class ACEAutocompleteTextField;
-
 @interface ACEViewController : UIViewController
 
-@property (nonatomic, strong) IBOutlet ACEAutocompleteTextField * textField;
+@property (nonatomic, strong) IBOutlet UITextField * textField;
 
 @end

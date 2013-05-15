@@ -21,52 +21,45 @@
 // THE SOFTWARE.
 
 
-#import "ACEAutocompleteInputView.h"
+#import "ACEAutocompleteBar.h"
 
 @interface ACEAutocompleteInputView ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *suggestionListView;
+
+@property (nonatomic, strong) NSArray * dataSource;
+@property (nonatomic, copy) AutocompleteBlock autocompleteBlock;
 @end
 
 #pragma mark -
 
 @implementation ACEAutocompleteInputView
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithBlock:(AutocompleteBlock)autocompleteBlock
 {
-    self = [super initWithFrame:frame];
+    self = [super initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 40.0f)];
     if (self) {
-        [self configure];
+        // save the autocomplete block
+        self.autocompleteBlock = autocompleteBlock;
+        
+        // create the table view with the suggestions
+        _suggestionListView	= [[UITableView alloc] initWithFrame:CGRectMake((self.bounds.size.width - self.bounds.size.height) / 2,
+                                                                            (self.bounds.size.height - self.bounds.size.width) / 2,
+                                                                            self.bounds.size.height, self.bounds.size.width)];
+        
+        _suggestionListView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+        _suggestionListView.transform = CGAffineTransformMakeRotation(-M_PI / 2);
+        
+        _suggestionListView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _suggestionListView.showsVerticalScrollIndicator = NO;
+        _suggestionListView.showsHorizontalScrollIndicator = NO;
+        
+        _suggestionListView.dataSource = self;
+        _suggestionListView.delegate = self;
+        
+        // add the table as subview
+        [self addSubview:_suggestionListView];
     }
     return self;
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        [self configure];
-    }
-    return self;
-}
-
-- (void)configure
-{
-    _suggestionListView	= [[UITableView alloc] initWithFrame:CGRectMake((self.bounds.size.width - self.bounds.size.height) / 2,
-                                                                        (self.bounds.size.height - self.bounds.size.width) / 2,
-                                                                        self.bounds.size.height, self.bounds.size.width)];
-
-    _suggestionListView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-    _suggestionListView.transform = CGAffineTransformMakeRotation(-M_PI / 2);
-    
-    _suggestionListView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _suggestionListView.showsVerticalScrollIndicator = NO;
-    _suggestionListView.showsHorizontalScrollIndicator = NO;
-    
-    _suggestionListView.dataSource = self;
-    _suggestionListView.delegate = self;
-    
-    // add the table as subview
-    [self addSubview:_suggestionListView];
 }
 
 - (void)setDataSource:(NSArray *)dataSource
@@ -90,6 +83,23 @@
 }
 
 
+#pragma mark - Text Field Delegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return NO;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSString * newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    self.dataSource = self.autocompleteBlock(newText);
+    
+    return YES;
+}
+
+
 #pragma mark - Table View Delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -101,6 +111,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self.delegate inputView:self didSelectString:[self stringForObjectAtIndex:indexPath.row]];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

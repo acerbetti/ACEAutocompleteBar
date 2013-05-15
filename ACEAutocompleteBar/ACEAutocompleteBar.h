@@ -23,6 +23,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class ACEAutocompleteInputView;
+
 typedef NSArray * (^AutocompleteBlock)(NSString * string);
 
 @protocol ACEAutocompleteItem <NSObject>
@@ -30,5 +32,14 @@ typedef NSArray * (^AutocompleteBlock)(NSString * string);
 - (NSString *)autocompleteString;
 
 @end
+
+@protocol ACEAutocompleteInputDelegate <NSObject>
+
+- (void)inputView:(ACEAutocompleteInputView *)inputView didSelectString:(NSString *)string;
+
+@end
+
+#import "ACEAutocompleteInputView.h"
+#import "UITextField+ACEAutocompleteBar.h"
 
 

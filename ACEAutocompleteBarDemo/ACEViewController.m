@@ -7,7 +7,7 @@
 //
 
 #import "ACEViewController.h"
-#import "ACEAutocompleteTextField.h"
+#import "ACEAutocompleteBar.h"
 
 @interface ACEViewController ()
 
@@ -20,8 +20,7 @@
     [super viewDidLoad];
     
     // set the autocomplete data
-    self.textField.autocompleteBlock = ^NSArray * (NSString * string) {
-        
+    [self.textField setAutocompleteWithBlock:^NSArray *(NSString *string) {
         NSMutableArray *data = [NSMutableArray array];
         for (NSString *s in @[@"one", @"two", @"three", @"four"]) {
             if ([s hasPrefix:string]) {
@@ -29,7 +28,7 @@
             }
         }
         return data;
-    };
+    }];
     
     // show the keyboard
     [self.textField becomeFirstResponder];
