@@ -25,7 +25,7 @@
 
 @class ACEAutocompleteInputView;
 
-typedef NSArray * (^AutocompleteBlock)(NSString * string);
+typedef NSArray * (^AutocompleteBlock)(ACEAutocompleteInputView *inputView, NSString * string);
 
 @protocol ACEAutocompleteItem <NSObject>
 

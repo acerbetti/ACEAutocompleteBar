@@ -25,7 +25,12 @@
 
 @interface ACEAutocompleteInputView : UIView<UITextFieldDelegate>
 
+// delegate
 @property (nonatomic, assign) id<ACEAutocompleteInputDelegate> delegate;
+
+// customization
+@property (nonatomic, strong) UIFont * font;
+@property (nonatomic, strong) UIColor * textColor;
 
 - (id)initWithBlock:(AutocompleteBlock)autocompleteBlock;
 

@@ -20,7 +20,14 @@
     [super viewDidLoad];
     
     // set the autocomplete data
-    [self.textField setAutocompleteWithBlock:^NSArray *(NSString *string) {
+    [self.textField setAutocompleteWithBlock:^NSArray *(ACEAutocompleteInputView *inputView, NSString *string) {
+        
+        // customize the view (optional)
+        inputView.font = [UIFont systemFontOfSize:20];
+        inputView.textColor = [UIColor whiteColor];
+        inputView.backgroundColor = [UIColor colorWithRed:0.2 green:0.3 blue:0.9 alpha:0.8];
+        
+        // return the data
         NSMutableArray *data = [NSMutableArray array];
         for (NSString *s in @[@"one", @"two", @"three", @"four"]) {
             if ([s hasPrefix:string]) {

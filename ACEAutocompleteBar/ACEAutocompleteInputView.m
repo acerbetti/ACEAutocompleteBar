@@ -49,12 +49,15 @@
         _suggestionListView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         _suggestionListView.transform = CGAffineTransformMakeRotation(-M_PI / 2);
         
-        _suggestionListView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _suggestionListView.showsVerticalScrollIndicator = NO;
         _suggestionListView.showsHorizontalScrollIndicator = NO;
+        _suggestionListView.backgroundColor = [UIColor clearColor];
         
         _suggestionListView.dataSource = self;
         _suggestionListView.delegate = self;
+        
+        // clean the rest of separators
+        _suggestionListView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         
         // add the table as subview
         [self addSubview:_suggestionListView];
@@ -75,6 +78,24 @@
     }
 }
 
+
+#pragma mark - Properties
+
+- (UIFont *)font
+{
+    if (_font == nil) {
+        _font = [UIFont boldSystemFontOfSize:18.0f];
+    }
+    return _font;
+}
+
+- (UIColor *)textColor
+{
+    if (_textColor == nil) {
+        _textColor = [UIColor darkTextColor];
+    }
+    return _textColor;
+}
 
 #pragma makr - Helpers
 
@@ -110,7 +131,7 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     NSString * newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    self.dataSource = self.autocompleteBlock(newText);
+    self.dataSource = self.autocompleteBlock(self, newText);
     return YES;
 }
 
@@ -119,9 +140,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGSize size = [[self stringForObjectAtIndex:indexPath.row] sizeWithFont:[UIFont boldSystemFontOfSize:20.0f]
+    CGSize size = [[self stringForObjectAtIndex:indexPath.row] sizeWithFont:self.font
                                                           constrainedToSize:CGSizeMake(320.0f, 40.0f)];
-    return size.width + 20.0f;
+    return size.width + 22.0f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -147,9 +168,14 @@
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-        cell.transform = CGAffineTransformMakeRotation(M_PI/2);
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        cell.contentView.transform = CGAffineTransformMakeRotation(M_PI/2);
     }
+    
+    cell.textLabel.font = self.font;
     cell.textLabel.text = [self stringForObjectAtIndex:indexPath.row];
+    cell.textLabel.textColor = self.textColor;
+    
     return cell;
 }
 
