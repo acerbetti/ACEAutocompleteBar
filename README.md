@@ -5,8 +5,8 @@ ACEAutocompleteBar
 
 Purpose
 --------------
-ACEAutocompleteBar is a simple category of the UITextField. It will show a list of words above the keyboard matching the prefix of the string entered by the user.
-
+ACEAutocompleteBar is a simple category of the UITextField. 
+It automatically displays text suggestions in real-time on the top of the virtual keyboard. It uses a block to create the data source and can work well will an asynchronous API request. 
 
 How-To
 ------------------
