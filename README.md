@@ -1,2 +1,44 @@
 ACEAutocompleteBar
 ==================
+
+![](https://github.com/acerbetti/ACEAutocompleteBar/blob/master/Example.png?raw=true)
+
+Purpose
+--------------
+ACEAutocompleteBar is a simple category of the UITextField. It will show a list of words above the keyboard matching the prefix of the string entered by the user.
+
+
+How-To
+------------------
+- Import the files from the folder "ACEAutocompleteBar" to your project
+- Add #import "ACEAutocompleteBar.h" in you source file
+- Call setAutocompleteWithBlock on the UITextField
+- In the block return an array of NSString or object implementing the protocol ACEAutocompleteItem
+
+
+Features
+------------------
+- Asynchronous data source. It can be local or from an API
+- Customizable toolbar (font and colors)
+
+
+ARC Compatibility
+------------------
+This component requires ARC
+
+
+Change Log
+------------------
+05/16/2013 - v0.1
+- Initial release
+
+
+License
+------------------
+Copyright (c) 2013 Stefano Acerbetti
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
