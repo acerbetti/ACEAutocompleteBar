@@ -138,9 +138,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGSize size = [[self stringForObjectAtIndex:indexPath.row] sizeWithFont:self.font
-                                                          constrainedToSize:CGSizeMake(320.0f, 40.0f)];
-    return size.width + 22.0f;
+    if ([self.dataSource respondsToSelector:@selector(inputView:widthForObject:)]) {
+        return [self.dataSource inputView:self widthForObject:[self.suggestionList objectAtIndex:indexPath.row]];
+        
+    } else {
+        NSString * string = [self stringForObjectAtIndex:indexPath.row];
+        CGSize size = [string sizeWithFont:self.font constrainedToSize:CGSizeMake(320.0f, 40.0f)];
+        return size.width + 22.0f;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -178,7 +183,14 @@
         cell.textLabel.textColor = self.textColor;
     }
     
-    cell.textLabel.text = [self stringForObjectAtIndex:indexPath.row];
+    // customize the cell view if the data source support it, just use the text otherwise
+    if ([self.dataSource respondsToSelector:@selector(inputView:customizeView:withObject:)]) {
+        [self.dataSource inputView:self customizeView:cell.contentView withObject:[self.suggestionList objectAtIndex:indexPath.row]];
+        
+    } else {
+        cell.textLabel.text = [self stringForObjectAtIndex:indexPath.row];
+    }
+    
     return cell;
 }
 

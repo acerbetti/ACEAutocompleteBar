@@ -46,6 +46,10 @@
 - (NSUInteger)minimumCharactersToTrigger:(ACEAutocompleteInputView *)inputView;
 - (void)inputView:(ACEAutocompleteInputView *)inputView itemsFor:(NSString *)query result:(void (^)(NSArray *items))resultBlock;
 
+@optional
+- (CGFloat)inputView:(ACEAutocompleteInputView *)inputView widthForObject:(id)object;
+- (void)inputView:(ACEAutocompleteInputView *)inputView customizeView:(UIView *)view withObject:(id)object;
+
 @end
 
 #import "ACEAutocompleteInputView.h"
