@@ -25,6 +25,8 @@
 
 @interface ACEAutocompleteInputView : UIView<UITextFieldDelegate>
 
+@property (nonatomic, assign) UITextField *textField;
+
 // delegate
 @property (nonatomic, assign) id<ACEAutocompleteDelegate> delegate;
 @property (nonatomic, assign) id<ACEAutocompleteDataSource> dataSource;

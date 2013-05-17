@@ -9,7 +9,7 @@
 #import "ACEViewController.h"
 #import "ACEAutocompleteBar.h"
 
-@interface ACEViewController ()<ACEAutocompleteDataSource>
+@interface ACEViewController ()<ACEAutocompleteDataSource, ACEAutocompleteDelegate>
 @property (nonatomic, strong) NSArray *sampleStrings;
 @end
 
@@ -23,6 +23,7 @@
     
     // set the autocomplete data
     [self.textField setAutocompleteWithDataSource:self
+                                         delegate:self
                                         customize:^(ACEAutocompleteInputView *inputView) {
                                             
                                             // customize the view (optional)
@@ -43,14 +44,22 @@
 }
 
 
+#pragma mark - Autocomplete Delegate
+
+- (void)inputView:(ACEAutocompleteInputView *)inputView didSelectObject:(id)object forField:(UITextField *)textField
+{
+    textField.text = object; // nssstring
+}
+
+
 #pragma mark - Autocomplete Data Source
 
-- (NSUInteger)minimumCharactersToTrigger
+- (NSUInteger)minimumCharactersToTrigger:(ACEAutocompleteInputView *)inputView
 {
     return 1;
 }
 
-- (void)itemsFor:(NSString *)query result:(void (^)(NSArray *items))resultBlock;
+- (void)inputView:(ACEAutocompleteInputView *)inputView itemsFor:(NSString *)query result:(void (^)(NSArray *items))resultBlock;
 {
     if (resultBlock != nil) {
         // execute the filter on a background thread to demo the asynchronous capability

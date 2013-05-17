@@ -31,31 +31,26 @@
 
 @implementation UITextField (ACEAutocompleteBar)
 
-- (void)setAutocompleteWithDataSource:(id<ACEAutocompleteDataSource>)dataSource customize:(void (^)(ACEAutocompleteInputView *inputView))customizeView
+- (void)setAutocompleteWithDataSource:(id<ACEAutocompleteDataSource>)dataSource
+                             delegate:(id<ACEAutocompleteDelegate>)delegate
+                            customize:(void (^)(ACEAutocompleteInputView *inputView))customizeView
 {
     ACEAutocompleteInputView * autocompleteBarView = [ACEAutocompleteInputView new];
     self.inputAccessoryView = autocompleteBarView;
     self.delegate = autocompleteBarView;
     
-    autocompleteBarView.delegate = self;
-    autocompleteBarView.dataSource = dataSource;
-    
-    // init state is not visible
-    [autocompleteBarView show:NO withAnimation:NO];
-    
     // pass the view to the caller to customize it
     if (customizeView) {
         customizeView(autocompleteBarView);
     }
-}
-
-- (void)inputView:(ACEAutocompleteInputView *)inputView didSelectString:(NSString *)string
-{
-    // update the text
-    self.text = string;
     
-    // hide the bar
-    [inputView show:NO withAnimation:YES];    
+    // set the protocols
+    autocompleteBarView.textField = self;
+    autocompleteBarView.delegate = delegate;
+    autocompleteBarView.dataSource = dataSource;
+    
+    // init state is not visible
+    [autocompleteBarView show:NO withAnimation:NO];
 }
 
 @end

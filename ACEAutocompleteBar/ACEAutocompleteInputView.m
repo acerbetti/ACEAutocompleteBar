@@ -120,8 +120,8 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     NSString * query = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    if (query.length >= [self.dataSource minimumCharactersToTrigger]) {
-        [self.dataSource itemsFor:query result:^(NSArray *items) {
+    if (query.length >= [self.dataSource minimumCharactersToTrigger:self]) {
+        [self.dataSource inputView:self itemsFor:query result:^(NSArray *items) {
             self.suggestionList = items;
             [self.suggestionListView reloadData];
         }];
@@ -145,7 +145,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.delegate inputView:self didSelectString:[self stringForObjectAtIndex:indexPath.row]];
+    [self.delegate inputView:self didSelectObject:[self.suggestionList objectAtIndex:indexPath.row] forField:self.textField];
+    
+    // hide the bar
+    [self show:NO withAnimation:YES];
+
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -168,12 +172,13 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
         cell.contentView.transform = CGAffineTransformMakeRotation(M_PI/2);
+        
+        // customization
+        cell.textLabel.font = self.font;
+        cell.textLabel.textColor = self.textColor;
     }
     
-    cell.textLabel.font = self.font;
     cell.textLabel.text = [self stringForObjectAtIndex:indexPath.row];
-    cell.textLabel.textColor = self.textColor;
-    
     return cell;
 }
 

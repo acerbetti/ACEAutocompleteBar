@@ -35,7 +35,7 @@
 
 @protocol ACEAutocompleteDelegate <NSObject>
 
-- (void)inputView:(ACEAutocompleteInputView *)inputView didSelectString:(NSString *)string;
+- (void)inputView:(ACEAutocompleteInputView *)inputView didSelectObject:(id)object forField:(UITextField *)textField;
 
 @end
 
@@ -43,8 +43,8 @@
 
 @protocol ACEAutocompleteDataSource <NSObject>
 
-- (NSUInteger)minimumCharactersToTrigger;
-- (void)itemsFor:(NSString *)query result:(void (^)(NSArray *items))resultBlock;
+- (NSUInteger)minimumCharactersToTrigger:(ACEAutocompleteInputView *)inputView;
+- (void)inputView:(ACEAutocompleteInputView *)inputView itemsFor:(NSString *)query result:(void (^)(NSArray *items))resultBlock;
 
 @end
 
