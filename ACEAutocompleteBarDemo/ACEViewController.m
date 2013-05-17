@@ -50,9 +50,9 @@
     return 1;
 }
 
-- (void)itemsFor:(NSString *)query whenReady:(void (^)(NSArray *))suggestionsReady
+- (void)itemsFor:(NSString *)query result:(void (^)(NSArray *items))resultBlock;
 {
-    if (suggestionsReady != nil) {
+    if (resultBlock != nil) {
         // execute the filter on a background thread to demo the asynchronous capability
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
             
@@ -66,7 +66,7 @@
             
             // return the filtered array in the main thread
             dispatch_async(dispatch_get_main_queue(), ^{
-                suggestionsReady(data);
+                resultBlock(data);
             });
         });
     }
