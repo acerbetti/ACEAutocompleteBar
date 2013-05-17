@@ -26,13 +26,12 @@
 @interface ACEAutocompleteInputView : UIView<UITextFieldDelegate>
 
 // delegate
-@property (nonatomic, assign) id<ACEAutocompleteInputDelegate> delegate;
+@property (nonatomic, assign) id<ACEAutocompleteDelegate> delegate;
+@property (nonatomic, assign) id<ACEAutocompleteDataSource> dataSource;
 
 // customization
 @property (nonatomic, strong) UIFont * font;
 @property (nonatomic, strong) UIColor * textColor;
-
-- (id)initWithBlock:(AutocompleteBlock)autocompleteBlock;
 
 - (void)show:(BOOL)show withAnimation:(BOOL)animated;
 

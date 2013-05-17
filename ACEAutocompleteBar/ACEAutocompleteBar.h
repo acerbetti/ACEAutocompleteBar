@@ -25,17 +25,26 @@
 
 @class ACEAutocompleteInputView;
 
-typedef NSArray * (^AutocompleteBlock)(ACEAutocompleteInputView *inputView, NSString * string);
-
 @protocol ACEAutocompleteItem <NSObject>
 
 - (NSString *)autocompleteString;
 
 @end
 
-@protocol ACEAutocompleteInputDelegate <NSObject>
+#pragma mark -
+
+@protocol ACEAutocompleteDelegate <NSObject>
 
 - (void)inputView:(ACEAutocompleteInputView *)inputView didSelectString:(NSString *)string;
+
+@end
+
+#pragma mark -
+
+@protocol ACEAutocompleteDataSource <NSObject>
+
+- (NSUInteger)minimumCharactersToTrigger;
+- (void)itemsFor:(NSString *)query result:(void (^)(NSArray *items))resultBlock;
 
 @end
 

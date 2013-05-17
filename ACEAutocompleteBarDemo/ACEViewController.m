@@ -9,8 +9,8 @@
 #import "ACEViewController.h"
 #import "ACEAutocompleteBar.h"
 
-@interface ACEViewController ()
-
+@interface ACEViewController ()<ACEAutocompleteDataSource>
+@property (nonatomic, strong) NSArray *sampleStrings;
 @end
 
 @implementation ACEViewController
@@ -19,23 +19,18 @@
 {
     [super viewDidLoad];
     
+    self.sampleStrings = @[@"one", @"two", @"three", @"four"];
+    
     // set the autocomplete data
-    [self.textField setAutocompleteWithBlock:^NSArray *(ACEAutocompleteInputView *inputView, NSString *string) {
-        
-        // customize the view (optional)
-        inputView.font = [UIFont systemFontOfSize:20];
-        inputView.textColor = [UIColor whiteColor];
-        inputView.backgroundColor = [UIColor colorWithRed:0.2 green:0.3 blue:0.9 alpha:0.8];
-        
-        // return the data
-        NSMutableArray *data = [NSMutableArray array];
-        for (NSString *s in @[@"one", @"two", @"three", @"four"]) {
-            if ([s hasPrefix:string]) {
-                [data addObject:s];
-            }
-        }
-        return data;
-    }];
+    [self.textField setAutocompleteWithDataSource:self
+                                        customize:^(ACEAutocompleteInputView *inputView) {
+                                            
+                                            // customize the view (optional)
+                                            inputView.font = [UIFont systemFontOfSize:20];
+                                            inputView.textColor = [UIColor whiteColor];
+                                            inputView.backgroundColor = [UIColor colorWithRed:0.2 green:0.3 blue:0.9 alpha:0.8];
+                                            
+                                        }];
     
     // show the keyboard
     [self.textField becomeFirstResponder];
@@ -45,6 +40,36 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+#pragma mark - Autocomplete Data Source
+
+- (NSUInteger)minimumCharactersToTrigger
+{
+    return 1;
+}
+
+- (void)itemsFor:(NSString *)query whenReady:(void (^)(NSArray *))suggestionsReady
+{
+    if (suggestionsReady != nil) {
+        // execute the filter on a background thread to demo the asynchronous capability
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            
+            // execute the filter
+            NSMutableArray *data = [NSMutableArray array];
+            for (NSString *s in self.sampleStrings) {
+                if ([s hasPrefix:query]) {
+                    [data addObject:s];
+                }
+            }
+            
+            // return the filtered array in the main thread
+            dispatch_async(dispatch_get_main_queue(), ^{
+                suggestionsReady(data);
+            });
+        });
+    }
 }
 
 @end

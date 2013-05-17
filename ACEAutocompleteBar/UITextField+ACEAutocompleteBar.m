@@ -23,7 +23,7 @@
 
 #import "ACEAutocompleteBar.h"
 
-@interface UITextField (Private)<ACEAutocompleteInputDelegate>
+@interface UITextField (Private)<ACEAutocompleteDelegate>
 
 @end
 
@@ -31,16 +31,22 @@
 
 @implementation UITextField (ACEAutocompleteBar)
 
-- (void)setAutocompleteWithBlock:(AutocompleteBlock)autocompleteBlock
+- (void)setAutocompleteWithDataSource:(id<ACEAutocompleteDataSource>)dataSource customize:(void (^)(ACEAutocompleteInputView *inputView))customizeView
 {
-    ACEAutocompleteInputView * autocompleteBarView = [[ACEAutocompleteInputView alloc] initWithBlock:autocompleteBlock];
+    ACEAutocompleteInputView * autocompleteBarView = [ACEAutocompleteInputView new];
     self.inputAccessoryView = autocompleteBarView;
+    self.delegate = autocompleteBarView;
     
     autocompleteBarView.delegate = self;
-    self.delegate = autocompleteBarView;
+    autocompleteBarView.dataSource = dataSource;
     
     // init state is not visible
     [autocompleteBarView show:NO withAnimation:NO];
+    
+    // pass the view to the caller to customize it
+    if (customizeView) {
+        customizeView(autocompleteBarView);
+    }
 }
 
 - (void)inputView:(ACEAutocompleteInputView *)inputView didSelectString:(NSString *)string

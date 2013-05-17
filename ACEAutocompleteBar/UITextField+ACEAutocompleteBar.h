@@ -25,6 +25,6 @@
 
 @interface UITextField (ACEAutocompleteBar)
 
-- (void)setAutocompleteWithBlock:(AutocompleteBlock)autocompleteBlock;
+- (void)setAutocompleteWithDataSource:(id<ACEAutocompleteDataSource>)dataSource customize:(void (^)(ACEAutocompleteInputView *inputView))customizeView;
 
 @end

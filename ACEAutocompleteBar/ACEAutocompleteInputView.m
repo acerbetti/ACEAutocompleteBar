@@ -24,23 +24,18 @@
 #import "ACEAutocompleteBar.h"
 
 @interface ACEAutocompleteInputView ()<UITableViewDelegate, UITableViewDataSource>
+@property (nonatomic, strong) NSArray *suggestionList;
 @property (nonatomic, strong) UITableView *suggestionListView;
-
-@property (nonatomic, strong) NSArray * dataSource;
-@property (nonatomic, copy) AutocompleteBlock autocompleteBlock;
 @end
 
 #pragma mark -
 
 @implementation ACEAutocompleteInputView
 
-- (id)initWithBlock:(AutocompleteBlock)autocompleteBlock
+- (id)init
 {
     self = [super initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 40.0f)];
     if (self) {
-        // save the autocomplete block
-        self.autocompleteBlock = autocompleteBlock;
-        
         // create the table view with the suggestions
         _suggestionListView	= [[UITableView alloc] initWithFrame:CGRectMake((self.bounds.size.width - self.bounds.size.height) / 2,
                                                                             (self.bounds.size.height - self.bounds.size.width) / 2,
@@ -99,15 +94,9 @@
 
 #pragma makr - Helpers
 
-- (void)setDataSource:(NSArray *)dataSource
-{
-    _dataSource = dataSource;
-    [self.suggestionListView reloadData];
-}
-
 - (NSString *)stringForObjectAtIndex:(NSUInteger)index
 {
-    id object = [self.dataSource objectAtIndex:index];
+    id object = [self.suggestionList objectAtIndex:index];
     if ([object conformsToProtocol:@protocol(ACEAutocompleteItem)]) {
         return [object autocompleteString];
         
@@ -130,8 +119,17 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    NSString * newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    self.dataSource = self.autocompleteBlock(self, newText);
+    NSString * query = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (query.length >= [self.dataSource minimumCharactersToTrigger]) {
+        [self.dataSource itemsFor:query result:^(NSArray *items) {
+            self.suggestionList = items;
+            [self.suggestionListView reloadData];
+        }];
+        
+    } else {
+        self.suggestionList = nil;
+        [self.suggestionListView reloadData];
+    }
     return YES;
 }
 
@@ -156,7 +154,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger suggestions = self.dataSource.count;
+    NSInteger suggestions = self.suggestionList.count;
     [self show:suggestions > 0 withAnimation:YES];
     return suggestions;
 }
