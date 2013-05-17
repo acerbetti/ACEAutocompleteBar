@@ -29,6 +29,9 @@ This component requires ARC
 
 Change Log
 ------------------
+05/16/2013 - v0.1.1
+- Better implementation of the asynchronous data source
+
 05/16/2013 - v0.1
 - Initial release
 
