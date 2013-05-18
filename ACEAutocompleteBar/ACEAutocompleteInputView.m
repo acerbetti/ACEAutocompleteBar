@@ -111,10 +111,34 @@
 
 #pragma mark - Text Field Delegate
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    [textField resignFirstResponder];
-    return NO;
+    if ([self.delegate respondsToSelector:_cmd]) {
+        return [self.delegate textFieldShouldBeginEditing:textField];
+    }
+    return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if ([self.delegate respondsToSelector:_cmd]) {
+        [self.delegate textFieldDidBeginEditing:textField];
+    }
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    if ([self.delegate respondsToSelector:_cmd]) {
+        return [self.delegate textFieldShouldEndEditing:textField];
+    }
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if ([self.delegate respondsToSelector:_cmd]) {
+        [self.delegate textFieldDidEndEditing:textField];
+    }
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -130,7 +154,28 @@
         self.suggestionList = nil;
         [self.suggestionListView reloadData];
     }
+    
+    if ([self.delegate respondsToSelector:_cmd]) {
+        return [self.delegate textField:textField shouldChangeCharactersInRange:range replacementString:string];
+    }
+    
     return YES;
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField
+{
+    if ([self.delegate respondsToSelector:_cmd]) {
+        return [self.delegate textFieldShouldClear:textField];
+    }
+    return NO;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if ([self.delegate respondsToSelector:_cmd]) {
+        return [self.delegate textFieldShouldReturn:textField];
+    }
+    return NO;
 }
 
 
@@ -179,13 +224,18 @@
         cell.contentView.transform = CGAffineTransformMakeRotation(M_PI/2);
         
         // customization
-        cell.textLabel.font = self.font;
-        cell.textLabel.textColor = self.textColor;
+        if ([self.dataSource respondsToSelector:@selector(inputView:customizeView:)]) {
+            [self.dataSource inputView:self customizeView:cell.contentView];
+            
+        } else {
+            cell.textLabel.font = self.font;
+            cell.textLabel.textColor = self.textColor;
+        }
     }
     
     // customize the cell view if the data source support it, just use the text otherwise
-    if ([self.dataSource respondsToSelector:@selector(inputView:customizeView:withObject:)]) {
-        [self.dataSource inputView:self customizeView:cell.contentView withObject:[self.suggestionList objectAtIndex:indexPath.row]];
+    if ([self.dataSource respondsToSelector:@selector(inputView:setObject:forView:)]) {
+        [self.dataSource inputView:self setObject:[self.suggestionList objectAtIndex:indexPath.row] forView:cell.contentView];
         
     } else {
         cell.textLabel.text = [self stringForObjectAtIndex:indexPath.row];

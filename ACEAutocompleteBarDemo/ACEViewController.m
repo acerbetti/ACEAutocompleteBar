@@ -51,6 +51,12 @@
     textField.text = object; // nssstring
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return NO;
+}
+
 
 #pragma mark - Autocomplete Data Source
 

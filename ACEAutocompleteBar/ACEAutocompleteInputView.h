@@ -31,7 +31,7 @@
 @property (nonatomic, assign) id<ACEAutocompleteDelegate> delegate;
 @property (nonatomic, assign) id<ACEAutocompleteDataSource> dataSource;
 
-// customization
+// customization (ignored when the optional methods of the data source are implemeted)
 @property (nonatomic, strong) UIFont * font;
 @property (nonatomic, strong) UIColor * textColor;
 
