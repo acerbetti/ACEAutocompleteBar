@@ -188,8 +188,14 @@
         
     } else {
         NSString * string = [self stringForObjectAtIndex:indexPath.row];
-        CGSize size = [string sizeWithFont:self.font constrainedToSize:CGSizeMake(320.0f, 40.0f)];
-        return size.width + 22.0f;
+        CGFloat width = [string sizeWithFont:self.font constrainedToSize:self.frame.size].width;
+        if (width == 0) {
+            // bigger than the screen
+            return self.frame.size.width;
+        }
+        
+        // add some margins
+        return width + 22.0f;
     }
 }
 
