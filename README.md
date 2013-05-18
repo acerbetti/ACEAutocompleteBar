@@ -12,8 +12,9 @@ How-To
 ------------------
 - Import the files from the folder "ACEAutocompleteBar" to your project
 - Add #import "ACEAutocompleteBar.h" in you source file
-- Call setAutocompleteWithBlock on the UITextField
-- In the block return an array of NSString or object implementing the protocol ACEAutocompleteItem
+- Call setAutocompleteWithDataSource on the UITextField
+- Set the data source instance to display the suggested words
+- Set the delegate instance to handle the actions on the text field
 
 
 Features
@@ -29,6 +30,9 @@ This component requires ARC
 
 Change Log
 ------------------
+05/18/2013 - v0.1.2
+- Extend the UITextField delegate to support more customization
+
 05/17/2013 - v0.1.1
 - Better implementation of the asynchronous data source
 

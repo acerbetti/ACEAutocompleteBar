@@ -201,7 +201,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.delegate inputView:self didSelectObject:[self.suggestionList objectAtIndex:indexPath.row] forField:self.textField];
+    [self.delegate textField:self.textField didSelectObject:[self.suggestionList objectAtIndex:indexPath.row] inInputView:self];
     
     // hide the bar
     [self show:NO withAnimation:YES];

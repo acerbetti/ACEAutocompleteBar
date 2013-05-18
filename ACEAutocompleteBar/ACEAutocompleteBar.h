@@ -37,7 +37,7 @@
 @protocol ACEAutocompleteDelegate <UITextFieldDelegate>
 
 // called when the user tap on one of the suggestions
-- (void)inputView:(ACEAutocompleteInputView *)inputView didSelectObject:(id)object forField:(UITextField *)textField;
+- (void)textField:(UITextField *)textField didSelectObject:(id)object inInputView:(ACEAutocompleteInputView *)inputView;
 
 @end
 

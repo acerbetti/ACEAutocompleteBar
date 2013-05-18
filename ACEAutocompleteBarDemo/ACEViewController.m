@@ -46,9 +46,9 @@
 
 #pragma mark - Autocomplete Delegate
 
-- (void)inputView:(ACEAutocompleteInputView *)inputView didSelectObject:(id)object forField:(UITextField *)textField
+- (void)textField:(UITextField *)textField didSelectObject:(id)object inInputView:(ACEAutocompleteInputView *)inputView
 {
-    textField.text = object; // nssstring
+    textField.text = object; // NSString
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
