@@ -30,6 +30,10 @@ This component requires ARC
 
 Change Log
 ------------------
+05/20/2013 - v1.0.0
+- Support for custom height
+- Fixed change orientation bug
+
 05/18/2013 - v0.1.2
 - Extend the UITextField delegate to support more customization
 
