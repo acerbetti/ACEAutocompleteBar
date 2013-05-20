@@ -35,6 +35,8 @@
 @property (nonatomic, strong) UIFont * font;
 @property (nonatomic, strong) UIColor * textColor;
 
+- (id)initWithHeight:(CGFloat)height;
+
 - (void)show:(BOOL)show withAnimation:(BOOL)animated;
 
 @end

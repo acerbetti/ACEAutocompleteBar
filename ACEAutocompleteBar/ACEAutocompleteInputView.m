@@ -23,6 +23,8 @@
 
 #import "ACEAutocompleteBar.h"
 
+#define kDefaultHeight 44.0f
+
 @interface ACEAutocompleteInputView ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) NSArray *suggestionList;
 @property (nonatomic, strong) UITableView *suggestionListView;
@@ -34,14 +36,19 @@
 
 - (id)init
 {
-    self = [super initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 40.0f)];
+    return [self initWithHeight:kDefaultHeight];
+}
+
+- (id)initWithHeight:(CGFloat)height
+{
+    self = [super initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, height)];
     if (self) {
         // create the table view with the suggestions
         _suggestionListView	= [[UITableView alloc] initWithFrame:CGRectMake((self.bounds.size.width - self.bounds.size.height) / 2,
                                                                             (self.bounds.size.height - self.bounds.size.width) / 2,
                                                                             self.bounds.size.height, self.bounds.size.width)];
         
-        _suggestionListView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+        _suggestionListView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         _suggestionListView.transform = CGAffineTransformMakeRotation(-M_PI / 2);
         
         _suggestionListView.showsVerticalScrollIndicator = NO;
