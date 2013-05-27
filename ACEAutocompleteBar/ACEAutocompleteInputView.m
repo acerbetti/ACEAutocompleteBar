@@ -81,6 +81,10 @@
         
     } else {
         self.alpha = (show) ? 1.0f : 0.0f;
+		// since setting self.alpha when coming from textFieldShouldBeingEditing doesn't appear to work,
+		// just change the background to clear and back to your custom color when suggestionList isn't empty
+		self.suggestionListView.alpha = (show) ? 1.0f : 0.0f;
+		self.backgroundColor = self.suggestionList.count == 0 ? [UIColor clearColor] : [UIColor colorWithWhite: 0.8f alpha: 1.0f];
     }
 }
 
@@ -124,6 +128,8 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+	// when receiving firstResponder it shows an empty bar
+	[self show: self.suggestionList.count > 0 ? YES : NO withAnimation: NO];
     if ([self.delegate respondsToSelector:_cmd]) {
         return [self.delegate textFieldShouldBeginEditing:textField];
     }
