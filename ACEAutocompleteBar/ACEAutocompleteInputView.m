@@ -86,10 +86,12 @@
         [UIView animateWithDuration:0.3
                          animations:^{
                              [self show:show withAnimation:NO];
+							 self.hidden = !show;
                          } completion:nil];
         
     } else {
         self.alpha = (show) ? 1.0f : 0.0f;
+		self.hidden = !show;
     }
 }
 
