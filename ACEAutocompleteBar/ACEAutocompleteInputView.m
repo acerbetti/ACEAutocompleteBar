@@ -23,11 +23,7 @@
 
 #import "ACEAutocompleteBar.h"
 
-#define kDefaultHeight      44.0f
-#define kDefaultMargin      5.0f
-
-#define kTagRotatedView     101
-#define kTagLabelView       102
+#define kDefaultHeight 44.0f
 
 @interface ACEAutocompleteInputView ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) NSArray *suggestionList;
@@ -52,7 +48,7 @@
                                                                             (self.bounds.size.height - self.bounds.size.width) / 2,
                                                                             self.bounds.size.height, self.bounds.size.width)];
         
-        _suggestionListView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        _suggestionListView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         _suggestionListView.transform = CGAffineTransformMakeRotation(-M_PI / 2);
         
         _suggestionListView.showsVerticalScrollIndicator = NO;
@@ -206,7 +202,7 @@
         }
         
         // add some margins
-        return width + (kDefaultMargin * 2) + 1.0f;
+        return width + 22.0f;
     }
 }
 
@@ -234,63 +230,31 @@
 {
     static NSString * cellId = @"cell";
     
-    UIView *rotatedView = nil;
-    
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-		cell.bounds	= CGRectMake(0, 0, self.bounds.size.height, self.frame.size.height);
-		cell.contentView.frame = cell.bounds;
-		cell.selectionStyle = UITableViewCellSelectionStyleNone;
-		
-        CGRect frame = CGRectInset(CGRectMake(0.0f, 0.0f, cell.bounds.size.height, cell.bounds.size.width), kDefaultMargin, kDefaultMargin);
-		rotatedView = [[UIView alloc] initWithFrame:frame];
-        rotatedView.tag = kTagRotatedView;
-		rotatedView.center = cell.contentView.center;
-		rotatedView.clipsToBounds = YES;
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        cell.contentView.transform = CGAffineTransformMakeRotation(M_PI/2);
         
-        rotatedView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-        rotatedView.transform = CGAffineTransformMakeRotation(M_PI / 2);
-        
-		[cell.contentView addSubview:rotatedView];
-		
         // customization
-        [self customizeView:rotatedView];
-	
-    } else {
-        rotatedView = [cell.contentView viewWithTag:kTagRotatedView];
+        if ([self.dataSource respondsToSelector:@selector(inputView:customizeView:)]) {
+            [self.dataSource inputView:self customizeView:cell.contentView];
+            
+        } else {
+            cell.textLabel.font = self.font;
+            cell.textLabel.textColor = self.textColor;
+        }
     }
     
     // customize the cell view if the data source support it, just use the text otherwise
     if ([self.dataSource respondsToSelector:@selector(inputView:setObject:forView:)]) {
-        [self.dataSource inputView:self setObject:[self.suggestionList objectAtIndex:indexPath.row] forView:rotatedView];
+        [self.dataSource inputView:self setObject:[self.suggestionList objectAtIndex:indexPath.row] forView:cell.contentView];
         
     } else {
-        UILabel * textLabel = (UILabel *)[rotatedView viewWithTag:kTagLabelView];
-        
-        // set the default properties
-        textLabel.font = self.font;
-        textLabel.textColor = self.textColor;
-        textLabel.text = [self stringForObjectAtIndex:indexPath.row];
+        cell.textLabel.text = [self stringForObjectAtIndex:indexPath.row];
     }
     
     return cell;
-}
-
-- (void)customizeView:(UIView *)rotatedView
-{
-    // customization
-    if ([self.dataSource respondsToSelector:@selector(inputView:customizeView:)]) {
-        [self.dataSource inputView:self customizeView:rotatedView];
-        
-    } else {
-        // create the label
-        UILabel * textLabel = [[UILabel alloc] initWithFrame:rotatedView.bounds];
-        textLabel.tag = kTagLabelView;
-        textLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        textLabel.backgroundColor = [UIColor clearColor];
-        [rotatedView addSubview:textLabel];
-    }
 }
 
 @end
