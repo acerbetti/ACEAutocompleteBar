@@ -52,9 +52,6 @@
                                                                             (self.bounds.size.height - self.bounds.size.width) / 2,
                                                                             self.bounds.size.height, self.bounds.size.width)];
         
-		// init the bar the hidden state
-		self.hidden = YES;
-		
         _suggestionListView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _suggestionListView.transform = CGAffineTransformMakeRotation(-M_PI / 2);
         
@@ -76,22 +73,18 @@
 
 - (void)show:(BOOL)show withAnimation:(BOOL)animated
 {
-	if (show && self.hidden) {
-		// this is to remove the frst animation when the virtual keyboard will appear
-		// use the hidden property to hide the bar wihout animations
-		self.hidden = NO;
-	}
-	
     if (animated) {
         [UIView animateWithDuration:0.3
                          animations:^{
                              [self show:show withAnimation:NO];
-							 self.hidden = !show;
                          } completion:nil];
         
     } else {
         self.alpha = (show) ? 1.0f : 0.0f;
-		self.hidden = !show;
+		// since setting self.alpha when coming from textFieldShouldBeingEditing doesn't appear to work,
+		// just change the background to clear and back to your custom color when suggestionList isn't empty
+		self.suggestionListView.alpha = (show) ? 1.0f : 0.0f;
+		self.backgroundColor = self.suggestionList.count == 0 ? [UIColor clearColor] : [UIColor colorWithWhite: 0.8f alpha: 1.0f];
     }
 }
 
@@ -135,6 +128,8 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+	// when receiving firstResponder it shows an empty bar
+	[self show: self.suggestionList.count > 0 ? YES : NO withAnimation: NO];
     if ([self.delegate respondsToSelector:_cmd]) {
         return [self.delegate textFieldShouldBeginEditing:textField];
     }
