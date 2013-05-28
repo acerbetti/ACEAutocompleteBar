@@ -52,6 +52,9 @@
                                                                             (self.bounds.size.height - self.bounds.size.width) / 2,
                                                                             self.bounds.size.height, self.bounds.size.width)];
         
+        // init the bar the hidden state
+        self.hidden = YES;
+        
         _suggestionListView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _suggestionListView.transform = CGAffineTransformMakeRotation(-M_PI / 2);
         
@@ -73,6 +76,12 @@
 
 - (void)show:(BOOL)show withAnimation:(BOOL)animated
 {
+    if (show && self.hidden) {
+        // this is to remove the frst animation when the virtual keyboard will appear
+        // use the hidden property to hide the bar wihout animations
+        self.hidden = NO;
+    }
+    
     if (animated) {
         [UIView animateWithDuration:0.3
                          animations:^{
