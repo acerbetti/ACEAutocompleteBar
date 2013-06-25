@@ -150,6 +150,7 @@
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
+	[self show: NO withAnimation: NO];
     if ([self.delegate respondsToSelector:_cmd]) {
         return [self.delegate textFieldShouldEndEditing:textField];
     }
