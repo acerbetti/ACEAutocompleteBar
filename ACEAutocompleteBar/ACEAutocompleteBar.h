@@ -20,6 +20,29 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+/*
+ Jimmy Jose
+ Added :
+ 
+ - Extended support for UITextView
+ - Extended support for every word in the sentence
+ - Retain cursor position after selecting suggestion
+ - Removed the need for implementing delegates for input field
+ - Added ignoreCase option to ignore case of the input and suggestion list
+ - Added property separatorColor to customizeView
+ - Added dataSourceContent to do the matching internally [can be made smooth, probably in next update]
+ - Added support to hide suggestion list on single tap or if selection changed
+ - Added clearButton to dismiss the suggestion list
+ - a) Set custom image for clear button
+ - b) Disable clear button
+ - Added 'text' NSString object in textfield delegate for result manipulation
+ - Added 'range' UITextRange object in textfield delegate for cursor manipulation
+ - Added 'text' NSString object in textview delegate for result manipulation
+ - Added 'range' NSRange type in textview delegate for cursor manipulation
+
+ */
+
+
 
 #import <UIKit/UIKit.h>
 
@@ -34,10 +57,13 @@
 
 #pragma mark -
 
-@protocol ACEAutocompleteDelegate <UITextFieldDelegate>
+@protocol ACEAutocompleteDelegate <UITextFieldDelegate,UITextViewDelegate>
 
+@optional
 // called when the user tap on one of the suggestions
-- (void)textField:(UITextField *)textField didSelectObject:(id)object inInputView:(ACEAutocompleteInputView *)inputView;
+- (void)textField:(UITextField *)textField didSelectObject:(id)object inInputView:(ACEAutocompleteInputView *)inputView newTextForInputField:(NSString *)text withRange:(UITextRange *)range;
+
+- (void)textView:(UITextView *)textView didSelectObject:(id)object inInputView:(ACEAutocompleteInputView *)inputView newTextForInputField:(NSString *)text withRange:(NSRange)range;
 
 @end
 
@@ -49,7 +75,7 @@
 - (NSUInteger)minimumCharactersToTrigger:(ACEAutocompleteInputView *)inputView;
 
 // use the block to return the array of items asynchronously based on the query string 
-- (void)inputView:(ACEAutocompleteInputView *)inputView itemsFor:(NSString *)query result:(void (^)(NSArray *items))resultBlock;
+- (void)inputView:(ACEAutocompleteInputView *)inputView itemsFor:(NSString *)query  ignoreCase:(BOOL)ignoreCase withResult:(NSArray *)resultArray result:(void (^)(NSArray *items))resultBlock;
 
 @optional
 
@@ -66,5 +92,6 @@
 
 #import "ACEAutocompleteInputView.h"
 #import "UITextField+ACEAutocompleteBar.h"
+#import "UITextView+ACEAutocompleteBar.h"
 
 

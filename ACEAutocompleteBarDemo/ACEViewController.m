@@ -2,8 +2,8 @@
 //  ACEViewController.m
 //  ACEAutocompleteBarDemo
 //
-//  Created by Stefano Acerbetti on 5/14/13.
-//  Copyright (c) 2013 Stefano Acerbetti. All rights reserved.
+//  Created by Jimmy on 24/07/13.
+//  Copyright (c) 2013 Varshyl Mobile Pvt. Ltd. All rights reserved.
 //
 
 #import "ACEViewController.h"
@@ -19,7 +19,7 @@
 {
     [super viewDidLoad];
     
-    self.sampleStrings = @[@"one", @"two", @"three", @"four"];
+    self.sampleStrings = @[@"One", @"two", @"three", @"Four", @"five", @"six", @"Seven", @"eight", @"nine", @"Ten", @"oone"];
     
     // set the autocomplete data
     [self.textField setAutocompleteWithDataSource:self
@@ -29,9 +29,48 @@
                                             // customize the view (optional)
                                             inputView.font = [UIFont systemFontOfSize:20];
                                             inputView.textColor = [UIColor whiteColor];
-                                            inputView.backgroundColor = [UIColor colorWithRed:0.2 green:0.3 blue:0.9 alpha:0.8];
+                                            inputView.backgroundColor = [UIColor grayColor];
+                                            inputView.alpha = 0.8;
+                                            inputView.separatorColor = [UIColor redColor];
                                             
-                                        }];
+                                        }
+                                       ignoreCase:YES dataSourceContent:self.sampleStrings
+                                 clearButtonImage:[UIImage imageNamed:@"btn_clear_black"]
+                         andShouldShowClearButton:YES
+     ];
+    
+    
+    [self.textField2 setAutocompleteWithDataSource:self
+                                          delegate:self
+                                         customize:^(ACEAutocompleteInputView *inputView) {
+                                             
+                                             // customize the view (optional)
+                                             inputView.font = [UIFont systemFontOfSize:20];
+                                             inputView.textColor = [UIColor whiteColor];
+                                             inputView.backgroundColor = [UIColor greenColor];
+                                             inputView.alpha = 0.8;
+                                             
+                                         }
+                                        ignoreCase:YES dataSourceContent:self.sampleStrings
+                                  clearButtonImage:[UIImage imageNamed:@"btn_clear_white"]
+                          andShouldShowClearButton:YES];
+    
+    
+    [self.textView setAutocompleteWithDataSource:self
+                                        delegate:self
+                                       customize:^(ACEAutocompleteInputView *inputView) {
+                                           
+                                           // customize the view (optional)
+                                           inputView.font = [UIFont systemFontOfSize:20];
+                                           inputView.textColor = [UIColor whiteColor];
+                                           inputView.backgroundColor = [UIColor colorWithRed:0.2 green:0.3 blue:0.9 alpha:0.8];
+                                           inputView.separatorColor = [UIColor brownColor];
+                                           
+                                       }
+                                      ignoreCase:YES dataSourceContent:self.sampleStrings
+                                clearButtonImage:nil
+                        andShouldShowClearButton:YES];
+    
     
     // show the keyboard
     [self.textField becomeFirstResponder];
@@ -44,20 +83,6 @@
 }
 
 
-#pragma mark - Autocomplete Delegate
-
-- (void)textField:(UITextField *)textField didSelectObject:(id)object inInputView:(ACEAutocompleteInputView *)inputView
-{
-    textField.text = object; // NSString
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return NO;
-}
-
-
 #pragma mark - Autocomplete Data Source
 
 - (NSUInteger)minimumCharactersToTrigger:(ACEAutocompleteInputView *)inputView
@@ -65,25 +90,11 @@
     return 1;
 }
 
-- (void)inputView:(ACEAutocompleteInputView *)inputView itemsFor:(NSString *)query result:(void (^)(NSArray *items))resultBlock;
-{
+-(void)inputView:(ACEAutocompleteInputView *)inputView itemsFor:(NSString *)query ignoreCase:(BOOL)ignoreCase withResult:(NSArray *)resultArray result:(void (^)(NSArray *))resultBlock{
+    
     if (resultBlock != nil) {
-        // execute the filter on a background thread to demo the asynchronous capability
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            
-            // execute the filter
-            NSMutableArray *data = [NSMutableArray array];
-            for (NSString *s in self.sampleStrings) {
-                if ([s hasPrefix:query]) {
-                    [data addObject:s];
-                }
-            }
-            
-            // return the filtered array in the main thread
-            dispatch_async(dispatch_get_main_queue(), ^{
-                resultBlock(data);
-            });
-        });
+        
+        resultBlock(resultArray);
     }
 }
 

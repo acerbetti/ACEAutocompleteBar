@@ -34,8 +34,12 @@
 - (void)setAutocompleteWithDataSource:(id<ACEAutocompleteDataSource>)dataSource
                              delegate:(id<ACEAutocompleteDelegate>)delegate
                             customize:(void (^)(ACEAutocompleteInputView *inputView))customizeView
+                           ignoreCase:(BOOL)ignoreCase
+                    dataSourceContent:(NSArray *)dataSourceContent
+                     clearButtonImage:(UIImage *)clearButtonImage
+             andShouldShowClearButton:(BOOL)shouldShowClearButton
 {
-    ACEAutocompleteInputView * autocompleteBarView = [ACEAutocompleteInputView new];
+    ACEAutocompleteInputView * autocompleteBarView = [[ACEAutocompleteInputView alloc] initWithClearButtonImage:clearButtonImage andShouldShowClearButton:shouldShowClearButton];
     self.inputAccessoryView = autocompleteBarView;
     self.delegate = autocompleteBarView;
     
@@ -44,11 +48,13 @@
         customizeView(autocompleteBarView);
     }
     
+    
     // set the protocols
     autocompleteBarView.textField = self;
     autocompleteBarView.delegate = delegate;
     autocompleteBarView.dataSource = dataSource;
-    
+    autocompleteBarView.ignoreCase = ignoreCase;
+    autocompleteBarView.dataSourceContent = dataSourceContent;
     // init state is not visible
     [autocompleteBarView show:NO withAnimation:NO];
 }

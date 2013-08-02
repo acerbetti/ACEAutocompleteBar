@@ -27,6 +27,10 @@
 
 - (void)setAutocompleteWithDataSource:(id<ACEAutocompleteDataSource>)dataSource
                              delegate:(id<ACEAutocompleteDelegate>)delegate
-                            customize:(void (^)(ACEAutocompleteInputView *inputView))customizeView;
+                            customize:(void (^)(ACEAutocompleteInputView *inputView))customizeView
+                           ignoreCase:(BOOL)ignoreCase
+                    dataSourceContent:(NSArray *)dataSourceContent
+                     clearButtonImage:(UIImage *)clearButtonImage
+             andShouldShowClearButton:(BOOL)shouldShowClearButton;
 
 @end
