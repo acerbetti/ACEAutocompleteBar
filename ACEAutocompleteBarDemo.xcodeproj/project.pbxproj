@@ -20,6 +20,9 @@
 		7BAA5F3D1742E296004F055F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BAA5F3C1742E296004F055F /* Default-568h@2x.png */; };
 		7BAA5F401742E296004F055F /* ACEViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BAA5F3F1742E296004F055F /* ACEViewController.m */; };
 		7BAA5F431742E296004F055F /* ACEViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BAA5F411742E296004F055F /* ACEViewController.xib */; };
+		BF6AB28217A7EDDE001A751C /* btn_clear_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF6AB28017A7EDDD001A751C /* btn_clear_black@2x.png */; };
+		BF6AB28317A7EDDE001A751C /* btn_clear_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF6AB28117A7EDDE001A751C /* btn_clear_white@2x.png */; };
+		BF84C07D179FF304002BD9C0 /* UITextView+ACEAutocompleteBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BF84C07C179FF304002BD9C0 /* UITextView+ACEAutocompleteBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +47,10 @@
 		7BAA5F3E1742E296004F055F /* ACEViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACEViewController.h; sourceTree = "<group>"; };
 		7BAA5F3F1742E296004F055F /* ACEViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACEViewController.m; sourceTree = "<group>"; };
 		7BAA5F421742E296004F055F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ACEViewController.xib; sourceTree = "<group>"; };
+		BF6AB28017A7EDDD001A751C /* btn_clear_black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_clear_black@2x.png"; sourceTree = "<group>"; };
+		BF6AB28117A7EDDE001A751C /* btn_clear_white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_clear_white@2x.png"; sourceTree = "<group>"; };
+		BF84C07B179FF304002BD9C0 /* UITextView+ACEAutocompleteBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+ACEAutocompleteBar.h"; sourceTree = "<group>"; };
+		BF84C07C179FF304002BD9C0 /* UITextView+ACEAutocompleteBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+ACEAutocompleteBar.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,11 +70,15 @@
 		7B7CD439174315F20086C346 /* ACEAutocompleteBar */ = {
 			isa = PBXGroup;
 			children = (
+				BF6AB28017A7EDDD001A751C /* btn_clear_black@2x.png */,
+				BF6AB28117A7EDDE001A751C /* btn_clear_white@2x.png */,
 				7B7CD43A174315F20086C346 /* ACEAutocompleteBar.h */,
 				7B7CD43B174315F20086C346 /* ACEAutocompleteInputView.h */,
 				7B7CD43C174315F20086C346 /* ACEAutocompleteInputView.m */,
 				7B7CD4411744368D0086C346 /* UITextField+ACEAutocompleteBar.h */,
 				7B7CD4421744368D0086C346 /* UITextField+ACEAutocompleteBar.m */,
+				BF84C07B179FF304002BD9C0 /* UITextView+ACEAutocompleteBar.h */,
+				BF84C07C179FF304002BD9C0 /* UITextView+ACEAutocompleteBar.m */,
 			);
 			path = ACEAutocompleteBar;
 			sourceTree = "<group>";
@@ -184,6 +195,8 @@
 				7BAA5F3B1742E296004F055F /* Default@2x.png in Resources */,
 				7BAA5F3D1742E296004F055F /* Default-568h@2x.png in Resources */,
 				7BAA5F431742E296004F055F /* ACEViewController.xib in Resources */,
+				BF6AB28217A7EDDE001A751C /* btn_clear_black@2x.png in Resources */,
+				BF6AB28317A7EDDE001A751C /* btn_clear_white@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,6 +212,7 @@
 				7BAA5F401742E296004F055F /* ACEViewController.m in Sources */,
 				7B7CD43F174315F20086C346 /* ACEAutocompleteInputView.m in Sources */,
 				7B7CD4431744368D0086C346 /* UITextField+ACEAutocompleteBar.m in Sources */,
+				BF84C07D179FF304002BD9C0 /* UITextView+ACEAutocompleteBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +300,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ACEAutocompleteBarDemo/ACEAutocompleteBarDemo-Prefix.pch";
 				INFOPLIST_FILE = "ACEAutocompleteBarDemo/ACEAutocompleteBarDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -297,6 +312,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ACEAutocompleteBarDemo/ACEAutocompleteBarDemo-Prefix.pch";
 				INFOPLIST_FILE = "ACEAutocompleteBarDemo/ACEAutocompleteBarDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

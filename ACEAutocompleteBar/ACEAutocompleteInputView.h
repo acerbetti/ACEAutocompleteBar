@@ -23,19 +23,24 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ACEAutocompleteInputView : UIView<UITextFieldDelegate>
+@interface ACEAutocompleteInputView : UIView<UITextFieldDelegate,UITextViewDelegate>
 
 @property (nonatomic, assign) UITextField *textField;
+@property (nonatomic, assign) UITextView *textView;
+@property (nonatomic, assign) BOOL ignoreCase;
+@property (nonatomic, assign) NSArray *dataSourceContent;
 
 // delegate
 @property (nonatomic, assign) id<ACEAutocompleteDelegate> delegate;
 @property (nonatomic, assign) id<ACEAutocompleteDataSource> dataSource;
 
 // customization (ignored when the optional methods of the data source are implemeted)
-@property (nonatomic, strong) UIFont * font;
+@property (nonatomic, strong) UIFont  * font;
 @property (nonatomic, strong) UIColor * textColor;
+@property (nonatomic, strong) UIColor * separatorColor;
 
 - (id)initWithHeight:(CGFloat)height;
+-(id)initWithClearButtonImage:(UIImage *)clearButtonImage andShouldShowClearButton:(BOOL)shouldShowClearButton;
 
 - (void)show:(BOOL)show withAnimation:(BOOL)animated;
 
