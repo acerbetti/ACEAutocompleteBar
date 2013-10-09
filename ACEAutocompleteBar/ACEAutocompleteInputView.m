@@ -211,7 +211,15 @@
         
     } else {
         NSString * string = [self stringForObjectAtIndex:indexPath.row];
-        CGFloat width = [string sizeWithFont:self.font constrainedToSize:self.frame.size].width;
+        CGFloat width;
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
+	width = [string boundingRectWithSize: self.frame.size
+				     options: NSStringDrawingUsesLineFragmentOrigin
+				  attributes: @{NSFontAttributeName : self.font}
+				     context: nil].size.width;
+#else
+	width = [string sizeWithFont:self.font constrainedToSize:self.frame.size].width;
+#endif
         if (width == 0) {
             // bigger than the screen
             return self.frame.size.width;
