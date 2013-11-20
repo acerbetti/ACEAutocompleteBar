@@ -29,6 +29,17 @@
 #define kTagRotatedView     101
 #define kTagLabelView       102
 
+NSUInteger DeviceSystemMajorVersion()
+{
+    static NSUInteger _deviceSystemMajorVersion = -1;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        
+        _deviceSystemMajorVersion = [[[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."] objectAtIndex:0] intValue];
+    });
+    return _deviceSystemMajorVersion;
+}
+
 @interface ACEAutocompleteInputView ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) NSArray *suggestionList;
 @property (nonatomic, strong) UITableView *suggestionListView;
@@ -61,6 +72,7 @@
         _suggestionListView.showsVerticalScrollIndicator = NO;
         _suggestionListView.showsHorizontalScrollIndicator = NO;
         _suggestionListView.backgroundColor = [UIColor clearColor];
+        _suggestionListView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
         _suggestionListView.dataSource = self;
         _suggestionListView.delegate = self;
@@ -212,14 +224,20 @@
     } else {
         NSString * string = [self stringForObjectAtIndex:indexPath.row];
         CGFloat width;
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
-	width = [string boundingRectWithSize: self.frame.size
-				     options: NSStringDrawingUsesLineFragmentOrigin
-				  attributes: @{NSFontAttributeName : self.font}
-				     context: nil].size.width;
-#else
-	width = [string sizeWithFont:self.font constrainedToSize:self.frame.size].width;
-#endif
+        
+        if (DeviceSystemMajorVersion() >= 7) {
+            width = [string boundingRectWithSize: self.frame.size
+                                         options: NSStringDrawingUsesLineFragmentOrigin
+                                      attributes: @{NSFontAttributeName : self.font}
+                                         context: nil].size.width;
+            width = ceilf(width);
+            width+=1;
+            NSLog(@"Comess");
+        } else{
+            width = [string sizeWithFont:self.font constrainedToSize:self.frame.size].width;
+            NSLog(@"Not comes");
+        }
+        
         if (width == 0) {
             // bigger than the screen
             return self.frame.size.width;
@@ -262,6 +280,14 @@
 		cell.bounds	= CGRectMake(0, 0, self.bounds.size.height, self.frame.size.height);
 		cell.contentView.frame = cell.bounds;
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor clearColor];
+        
+        UIView *separatorView = [[UIView alloc] init];
+        
+        CGFloat cellHeight = [self tableView:_suggestionListView heightForRowAtIndexPath:indexPath];
+        separatorView.frame = CGRectMake(cell.contentView.frame.origin.x, cellHeight-1, cell.contentView.frame.size.width, 1);
+        separatorView.backgroundColor = [UIColor whiteColor];
+        
 		
         CGRect frame = CGRectInset(CGRectMake(0.0f, 0.0f, cell.bounds.size.height, cell.bounds.size.width), kDefaultMargin, kDefaultMargin);
 		rotatedView = [[UIView alloc] initWithFrame:frame];
@@ -273,13 +299,15 @@
         rotatedView.transform = CGAffineTransformMakeRotation(M_PI / 2);
         
 		[cell.contentView addSubview:rotatedView];
-		
+        [cell addSubview:separatorView];
         // customization
         [self customizeView:rotatedView];
 	
     } else {
         rotatedView = [cell.contentView viewWithTag:kTagRotatedView];
     }
+    
+    
     
     // customize the cell view if the data source support it, just use the text otherwise
     if ([self.dataSource respondsToSelector:@selector(inputView:setObject:forView:)]) {

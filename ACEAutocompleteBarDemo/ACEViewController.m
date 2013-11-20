@@ -19,7 +19,7 @@
 {
     [super viewDidLoad];
     
-    self.sampleStrings = @[@"one", @"two", @"three", @"four"];
+    self.sampleStrings = @[@"one", @"two", @"three", @"four", @"thnmmmmmr", @"t", @"tgbvsdsbdsj", @"tttttt", @"tre"];
     
     // set the autocomplete data
     [self.textField setAutocompleteWithDataSource:self
