@@ -11,5 +11,6 @@
 @interface ACEViewController : UIViewController
 
 @property (nonatomic, strong) IBOutlet UITextField * textField;
+@property (weak, nonatomic) IBOutlet UITextField *textField2;
 
 @end

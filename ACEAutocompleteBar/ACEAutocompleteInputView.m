@@ -22,6 +22,7 @@
 
 
 #import "ACEAutocompleteBar.h"
+#import "ACECell.h"
 
 #define kDefaultHeight      44.0f
 #define kDefaultMargin      5.0f
@@ -274,19 +275,15 @@ NSUInteger DeviceSystemMajorVersion()
     
     UIView *rotatedView = nil;
     
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    ACECell * cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+        cell = [[ACECell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
 		cell.bounds	= CGRectMake(0, 0, self.bounds.size.height, self.frame.size.height);
 		cell.contentView.frame = cell.bounds;
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
         
-        UIView *separatorView = [[UIView alloc] init];
         
-        CGFloat cellHeight = [self tableView:_suggestionListView heightForRowAtIndexPath:indexPath];
-        separatorView.frame = CGRectMake(cell.contentView.frame.origin.x, cellHeight-1, cell.contentView.frame.size.width, 1);
-        separatorView.backgroundColor = [UIColor whiteColor];
         
 		
         CGRect frame = CGRectInset(CGRectMake(0.0f, 0.0f, cell.bounds.size.height, cell.bounds.size.width), kDefaultMargin, kDefaultMargin);
@@ -299,15 +296,22 @@ NSUInteger DeviceSystemMajorVersion()
         rotatedView.transform = CGAffineTransformMakeRotation(M_PI / 2);
         
 		[cell.contentView addSubview:rotatedView];
-        [cell addSubview:separatorView];
+        
         // customization
         [self customizeView:rotatedView];
 	
     } else {
         rotatedView = [cell.contentView viewWithTag:kTagRotatedView];
     }
+    if (cell.separatorView) {
+        [cell.separatorView removeFromSuperview];
+    }
+    cell.separatorView = [[UIView alloc] init];
     
-    
+    CGFloat cellHeight = [self tableView:_suggestionListView heightForRowAtIndexPath:indexPath];
+    cell.separatorView.frame = CGRectMake(cell.contentView.frame.origin.x, cellHeight-1, cell.contentView.frame.size.width, 1);
+    cell.separatorView.backgroundColor = [UIColor whiteColor];
+    [cell addSubview:cell.separatorView];
     
     // customize the cell view if the data source support it, just use the text otherwise
     if ([self.dataSource respondsToSelector:@selector(inputView:setObject:forView:)]) {
