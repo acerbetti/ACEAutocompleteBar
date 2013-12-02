@@ -22,7 +22,6 @@
 
 
 #import "ACEAutocompleteBar.h"
-#import "ACECell.h"
 
 #define kDefaultHeight      44.0f
 #define kDefaultMargin      5.0f
@@ -40,6 +39,14 @@ NSUInteger DeviceSystemMajorVersion()
     });
     return _deviceSystemMajorVersion;
 }
+
+@interface ACECell : UITableViewCell
+@property (nonatomic, retain) UIView *separatorView;
+@end
+
+@implementation ACECell
+
+@end
 
 @interface ACEAutocompleteInputView ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) NSArray *suggestionList;

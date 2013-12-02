@@ -20,7 +20,6 @@
 		7BAA5F3D1742E296004F055F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BAA5F3C1742E296004F055F /* Default-568h@2x.png */; };
 		7BAA5F401742E296004F055F /* ACEViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BAA5F3F1742E296004F055F /* ACEViewController.m */; };
 		7BAA5F431742E296004F055F /* ACEViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BAA5F411742E296004F055F /* ACEViewController.xib */; };
-		C3440835183CF5A600E48E0B /* ACECell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3440834183CF5A600E48E0B /* ACECell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,8 +44,6 @@
 		7BAA5F3E1742E296004F055F /* ACEViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACEViewController.h; sourceTree = "<group>"; };
 		7BAA5F3F1742E296004F055F /* ACEViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACEViewController.m; sourceTree = "<group>"; };
 		7BAA5F421742E296004F055F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ACEViewController.xib; sourceTree = "<group>"; };
-		C3440833183CF5A600E48E0B /* ACECell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACECell.h; sourceTree = "<group>"; };
-		C3440834183CF5A600E48E0B /* ACECell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACECell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,8 +68,6 @@
 				7B7CD43C174315F20086C346 /* ACEAutocompleteInputView.m */,
 				7B7CD4411744368D0086C346 /* UITextField+ACEAutocompleteBar.h */,
 				7B7CD4421744368D0086C346 /* UITextField+ACEAutocompleteBar.m */,
-				C3440833183CF5A600E48E0B /* ACECell.h */,
-				C3440834183CF5A600E48E0B /* ACECell.m */,
 			);
 			path = ACEAutocompleteBar;
 			sourceTree = "<group>";
@@ -200,7 +195,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7BAA5F331742E296004F055F /* main.m in Sources */,
-				C3440835183CF5A600E48E0B /* ACECell.m in Sources */,
 				7BAA5F371742E296004F055F /* ACEAppDelegate.m in Sources */,
 				7BAA5F401742E296004F055F /* ACEViewController.m in Sources */,
 				7B7CD43F174315F20086C346 /* ACEAutocompleteInputView.m in Sources */,
