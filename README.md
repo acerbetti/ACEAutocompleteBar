@@ -30,6 +30,9 @@ This component requires ARC
 
 Change Log
 ------------------
+12/02/2013 - v1.1.0
+- Support for iOS6 & iOS7
+- 
 05/20/2013 - v1.0.0
 - Support for custom height
 - Fixed change orientation bug
