@@ -11,6 +11,7 @@
 
 @interface ACEViewController ()<ACEAutocompleteDataSource, ACEAutocompleteDelegate>
 @property (nonatomic, strong) NSArray *sampleStrings;
+@property (nonatomic, strong) NSArray *sampleStrings2;
 @end
 
 @implementation ACEViewController
@@ -19,7 +20,8 @@
 {
     [super viewDidLoad];
     
-    self.sampleStrings = @[@"one", @"two", @"three", @"four"];
+    self.sampleStrings = @[@"one", @"two", @"three", @"four", @"twenty", @"twenty three", @"two hundred", @"two thousand"];
+    self.sampleStrings2 = @[@"known", @"knowledge",@"knowledge management",@"twin twist"];
     
     // set the autocomplete data
     [self.textField setAutocompleteWithDataSource:self
@@ -35,6 +37,14 @@
     
     // show the keyboard
     [self.textField becomeFirstResponder];
+    [self.textField2 setAutocompleteWithDataSource:self delegate:self customize:^(ACEAutocompleteInputView *inputView) {
+        
+        // customize the view (optional)
+        inputView.font = [UIFont systemFontOfSize:20];
+        inputView.textColor = [UIColor whiteColor];
+        inputView.backgroundColor = [UIColor colorWithRed:0.2 green:0.3 blue:0.9 alpha:0.8];
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -72,8 +82,17 @@
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
             
             // execute the filter
+            
+            NSMutableArray *array;
+            
+            if (self.textField.isFirstResponder) {
+                array = [self.sampleStrings mutableCopy];
+            } else if (self.textField2.isFirstResponder){
+                array = [self.sampleStrings2 mutableCopy];
+            }
+            
             NSMutableArray *data = [NSMutableArray array];
-            for (NSString *s in self.sampleStrings) {
+            for (NSString *s in array) {
                 if ([s hasPrefix:query]) {
                     [data addObject:s];
                 }
