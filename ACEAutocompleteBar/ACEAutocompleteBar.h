@@ -53,6 +53,8 @@
 
 @optional
 
+- (NSString*)inputView:(ACEAutocompleteInputView *)inputView stringForObject:(id)object atIndex:(NSUInteger)index;
+
 // calculate the width of the view for the object (NSString or ACEAutocompleteItem)
 - (CGFloat)inputView:(ACEAutocompleteInputView *)inputView widthForObject:(id)object;
 

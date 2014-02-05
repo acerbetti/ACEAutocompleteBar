@@ -138,8 +138,11 @@ NSUInteger DeviceSystemMajorVersion()
 
 - (NSString *)stringForObjectAtIndex:(NSUInteger)index
 {
+    
     id object = [self.suggestionList objectAtIndex:index];
-    if ([object conformsToProtocol:@protocol(ACEAutocompleteItem)]) {
+    if ([_dataSource respondsToSelector:@selector(inputView:stringForObject:atIndex:)]) {
+        return [_dataSource inputView:self stringForObject:object atIndex:index];
+    } else if ([object conformsToProtocol:@protocol(ACEAutocompleteItem)]) {
         return [object autocompleteString];
         
     } else if ([object isKindOfClass:[NSString class]]) {
@@ -240,10 +243,8 @@ NSUInteger DeviceSystemMajorVersion()
                                          context: nil].size.width;
             width = ceilf(width);
             width+=1;
-            NSLog(@"Comess");
         } else{
             width = [string sizeWithFont:self.font constrainedToSize:self.frame.size].width;
-            NSLog(@"Not comes");
         }
         
         if (width == 0) {
