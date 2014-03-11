@@ -30,6 +30,9 @@ This component requires ARC
 
 Change Log
 ------------------
+02/05/2014 - v1.1.1
+- Added new optional ACEAutocompleteDataSource method for getting string value for an object
+
 12/02/2013 - v1.1.0
 - Support for iOS6 & iOS7
 
